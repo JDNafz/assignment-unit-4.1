@@ -127,9 +127,64 @@ console.log(allPositive([1,2,3,4,5,0,-1, -20, -44]))
 //     CodeWars(https://www.codewars.com/). Then describe it 
 //     here in a comment, write the function, and test it!
 
+// You live in the city of Cartesia where all roads are laid out in a perfect grid. 
+// You arrived ten minutes too early to an appointment, so you decided to take the opportunity 
+// to go for a short walk. The city provides its citizens with a Walk Generating App on their 
+//phones -- everytime you press the button it sends you an array of one-letter strings representing 
+//directions to walk (eg. ['n', 's', 'w', 'e']). You always walk only a single block for each letter 
+//(direction) and you know it takes you one minute to traverse one city block, so create a function 
+//that will return true if the walk the app gives you will take you exactly ten minutes (you don't 
+//want to be early or late!) and will, of course, return you to your starting point. Return false otherwise.
 
+function isValidWalk(walk) {
+  //first check if it will take 10 minutes
+  if (walk.length != 10){
+    console.log("not a 10 minute walk");
+    return false;
+  } else {
+ //then calculate if you end at the same position, n/s and e/w need the same total
+ //tally each of the instructions
+    let northSouth = 0;
+    let eastWest = 0;
+    for (let i = 0; i < walk.length; i++){
+      switch(walk[i]){
+          case 'n': 
+          northSouth++;
+          break;
+          case 's':
+          northSouth--;
+          break;
+          case 'e':
+          eastWest++;
+          break;
+          case 'w':
+          eastWest--;
+          break;
+      };
+    };
+  // compare totals
+    if (northSouth === 0 && eastWest === 0){
+      console.log("valid walk");
+      return true;
+    } else {
+      console.log("not valid, did not end at the starting location."); 
+      return false; 
+    }
+  }
+}
 
-
+let test1 = ['n','s','n','s','n','s','n','s','n','s'];
+let test2 = ['w','e','w','e','w','e','w','e','w','e','w','e'];
+let test3 = ['w'];
+let test4 = ['n','n','n','s','n','s','n','s','n','s'];
+console.log("test1:");
+isValidWalk(test1);
+console.log("test2:");
+isValidWalk(test2);
+console.log("test3:");
+isValidWalk(test3);
+console.log("test4:");
+isValidWalk(test4);
 
 
 
